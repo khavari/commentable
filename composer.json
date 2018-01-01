@@ -1,0 +1,40 @@
+{
+    "name": "easteregg/commentable",
+    "description": "comment for products and contents",
+    "type": "Package",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mohammad Khavari",
+            "email": "khavari.mvc@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Easteregg\\Comment\\": "src"
+        }
+    },
+    "scripts": {
+
+    },
+    "config": {
+
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repos.raymand-co.ir"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Easteregg\\Comment\\CommentServiceProvider"
+            ]
+        }
+    }
+
+}
