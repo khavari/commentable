@@ -4,6 +4,7 @@ namespace Easteregg\Comment;
 
 
 use Carbon\Carbon;
+use Easteregg\CMS\ContentManagement\Content\Eloquent\Content;
 use Easteregg\Diagon\Product\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -17,18 +18,12 @@ class CommentController extends Controller
 
     public function index()
     {
-
-//        $product = Product::find(1);
-//        $c = new Comment();
-//        $c->body = str_random(60);
-//        $c->user_id = auth()->user()->id;
-//        $product->comments()->save($c);
-
+         setting()->dot("enableComment", "1");
         if (Request('search')) {
             $search = Request('search');
-            $comments = Comment::withTrashed()->Where('body', 'like', '%' . $search . '%')->paginate(15);
+            $comments = Comment::withTrashed()->whereTranslationLike('body', "%$search%")->paginate(15);
         }
-        elseif (Request('approve')) {
+        elseif (Request('approve')){
             $approve = Request('approve');
             if ($approve == 'approve') {
                 $comments = Comment::withTrashed()->Where('approve', 1)->paginate(15);
@@ -36,11 +31,12 @@ class CommentController extends Controller
                 $comments = Comment::withTrashed()->Where('approve', 0)->paginate(15);
             } elseif ($approve == 'pending') {
                 $comments = Comment::withTrashed()->Where('approve', null)->paginate(15);
-            }else{
+            } else {
                 $comments = Comment::withTrashed()->paginate(15);
             }
 
-        } else {
+        }
+        else {
             $comments = Comment::withTrashed()->paginate(15);
         }
 
@@ -66,7 +62,7 @@ class CommentController extends Controller
         return view('comment::dashboard.edit', compact('comment'));
     }
 
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
         $parent = Comment::findOrFail($request->parent_id);
 
@@ -83,7 +79,7 @@ class CommentController extends Controller
         return redirect('dashboard/comments');
     }
 
-    public function update($id, Request $request)
+    public function update($id, CommentRequest $request)
     {
         Comment::findOrFail($id)->update($request->all());
         session()->flash('success', trans('comment::messages.updatedMessage'));
@@ -126,6 +122,38 @@ class CommentController extends Controller
         $comment->save();
         session()->flash('success', trans('comment::messages.unapprovedMessage'));
 
+        return back();
+    }
+
+    public function submit(CommentRequest $request)
+    {
+        $id = $request->commentable_id;
+        $body = $request->body;
+        if ($request->parent_id) {
+            $parent_id = $request->parent_id;
+        } else {
+            $parent_id = null;
+        }
+
+        $comment = new Comment();
+        $comment->parent_id = $parent_id;
+        $comment->body = $body;
+        $comment->user_id = auth()->user()->id;
+
+        $referer = $request->headers->get('referer');
+
+        if (str_contains($referer, ['products'])) {
+            $product = Product::findOrFail($id);
+            $product->comments()->save($comment);
+        } elseif (str_contains($referer, ['contents'])) {
+            $content = Content::findOrFail($id);
+            $content->comments()->save($comment);
+        }else{
+            return back();
+        }
+
+
+        session()->flash('successCommit', trans('comment::messages.submitMessage'));
         return back();
     }
 

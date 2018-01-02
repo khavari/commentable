@@ -29,7 +29,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function parent()
+    public function superlevel()
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
@@ -39,5 +39,16 @@ class Comment extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
+    public function scopeParent($query)
+    {
+        return $query->where('parent_id', null);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('approve', 1);
+    }
+
+    
 
 }

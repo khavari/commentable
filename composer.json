@@ -12,6 +12,12 @@
     "require": {
 
     },
+    "require-dev": {
+        "orchestra/testbench": "3.5.*",
+        "orchestra/testbench-browser-kit": "3.5.*",
+        "fzaninotto/faker": "^1.6",
+        "phpunit/phpunit": "6.*"
+    },
     "autoload": {
         "psr-4": {
             "Easteregg\\Comment\\": "src"

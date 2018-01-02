@@ -20,12 +20,23 @@ class CreateCommentsTable extends Migration
             $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('commentable_id')->unsigned()->index();
             $table->string('commentable_type');
-            $table->text('body')->nullable();
             $table->boolean('approve')->nullable();
-            $table->dateTime('read_at')->nullable();
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('comment_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('comment_id')->unsigned();
+            $table->string('locale');
+            $table->string('body');
+
+            $table->unique(['comment_id','locale']);
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
+        });
+
+
     }
 
     /**
@@ -35,6 +46,7 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        Schema::dropIfExists('comment_translations');
+        Schema::dropIfExists('comments');
     }
 }

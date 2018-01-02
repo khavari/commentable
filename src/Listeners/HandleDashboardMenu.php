@@ -17,13 +17,13 @@ class HandleDashboardMenu
         $this->menu->icon = "fa fa-comments-o";
         $this->menu->url = url('dashboard/comments');
 
-        $this->menu->addChildren([
-            [
-                'title' => trans("comment::messages.comments"),
-                'icon' => 'fa-table',
-                'url' => url('dashboard/comments'),
-            ]
-        ]);
+//        $this->menu->addChildren([
+//            [
+//                'title' => trans("comment::messages.comments"),
+//                'icon' => 'fa-table',
+//                'url' => url('dashboard/comments'),
+//            ]
+//        ]);
     }
 
     public function handle()
