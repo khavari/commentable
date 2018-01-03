@@ -5,6 +5,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                 <input type="hidden" name="commentable_id" value="{{ $commentable_id }}">
+                <input type="hidden" name="commentable_type" value="{{ $commentable_type }}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">@lang('comment::messages.replyComment')</h4>

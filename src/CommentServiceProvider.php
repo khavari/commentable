@@ -4,7 +4,6 @@ namespace Easteregg\Comment;
 
 
 use Illuminate\Support\ServiceProvider;
-use Easteregg\Comment\CommentEventProvider;
 use Easteregg\Comment\Composer\CommentStylesComposer;
 
 class CommentServiceProvider extends ServiceProvider
@@ -28,7 +27,9 @@ class CommentServiceProvider extends ServiceProvider
 
     public function register()
     {
-        view()->composer('coredoc-assets::master', CommentStylesComposer::class);
+        view()->composer([
+            'coredoc-assets::master'
+        ], CommentStylesComposer::class);
         $this->app->register(CommentEventProvider::class);
     }
 

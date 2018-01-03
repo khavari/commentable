@@ -9,13 +9,13 @@ class CommentStylesComposer
         $view->with('scripts',
             $view->scripts .
             $view->getFactory()->make(
-                'safari::general.scripts'
+                'comment::frontend.scripts'
             )
         );
 
         $view->with('styles',
             $view->styles .
-            $view->getFactory()->make('safari::general.styles')
+            $view->getFactory()->make('comment::frontend.styles')
         );
     }
 }

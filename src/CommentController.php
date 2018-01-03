@@ -15,7 +15,6 @@ class CommentController extends Controller
 {
     protected $setting;
 
-
     public function index()
     {
          setting()->dot("enableComment", "1");
@@ -127,6 +126,11 @@ class CommentController extends Controller
 
     public function submit(CommentRequest $request)
     {
+        // Find model
+        $commentable_type = $request->commentable_type;
+        $model = app()->make($commentable_type);
+
+        // get data
         $id = $request->commentable_id;
         $body = $request->body;
         if ($request->parent_id) {
@@ -135,23 +139,14 @@ class CommentController extends Controller
             $parent_id = null;
         }
 
+        // new comment
         $comment = new Comment();
         $comment->parent_id = $parent_id;
         $comment->body = $body;
         $comment->user_id = auth()->user()->id;
-
-        $referer = $request->headers->get('referer');
-
-        if (str_contains($referer, ['products'])) {
-            $product = Product::findOrFail($id);
-            $product->comments()->save($comment);
-        } elseif (str_contains($referer, ['contents'])) {
-            $content = Content::findOrFail($id);
-            $content->comments()->save($comment);
-        }else{
-            return back();
-        }
-
+        // assign comment to model
+        $commentable = $model->findOrFail($id);
+        $commentable->comments()->save($comment);
 
         session()->flash('successCommit', trans('comment::messages.submitMessage'));
         return back();

@@ -1,9 +1,7 @@
 <div class="comment-item">
     <div class="comment-title">
         <span class="name"><i class="fa fa-commenting-o"></i>{{$comment->user->name}}</span>
-        <span class="date"><i
-                    class="fa fa-clock-o"></i>{{\Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
-        <a href=""></a>
+        <span class="date"><i class="fa fa-clock-o"></i>{{\Carbon\Carbon::parse($comment->created_at)->diffForHumans()}}</span>
         @if(auth()->check())
             <button type="button" class="btn btn-primary btn-xs modal-btn" data-toggle="modal"
                     data-target="#comment-modal-{{$comment->id}}">
@@ -20,7 +18,8 @@
     @foreach($comment->children()->active()->get() as $index => $comment)
         @include('comment::frontend.partials.comment', [
         'comment' =>$comment,
-        'commentable_id' => $commentable_id
+        'commentable_id' => $commentable_id,
+        'commentable_type' => $commentable_type
         ])
     @endforeach
 </div>
