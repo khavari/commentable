@@ -21,14 +21,21 @@ Add `CommentServiceProvider` and `CommentEventProvider` to the `providers` array
 );
 ```
 
-run the migration:
-```
-php artisan migrate --package=petersuhm/commentable
-```
-
-To publish the config settings in Laravel 5 use:
+To publish Migrations , Config , views
 ```
 php artisan vendor:publish --provider="Easteregg\Comment\CommentServiceProvider"
+
+php artisan vendor:publish --tag=comment.views
+
+php artisan vendor:publish --tag=comment.config
+
+php artisan vendor:publish --tag=comment.db
+```
+
+
+run the migration:
+```
+php artisan migrate
 ```
 
 ### Comment relation in Product model

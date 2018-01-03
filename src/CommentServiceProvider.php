@@ -20,6 +20,8 @@ class CommentServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/Views' => base_path('resources/views/vendor/comment'),
         ], 'comment.views');
+
+
         $this->publishes([
             __DIR__ . '/Config/comment.php' => config_path('comment.php'),
         ], 'comment.config');
