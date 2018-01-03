@@ -25,11 +25,10 @@ To publish Migrations , Config , views
 ```
 php artisan vendor:publish --provider="Easteregg\Comment\CommentServiceProvider"
 
-php artisan vendor:publish --tag=comment.views
-
-php artisan vendor:publish --tag=comment.config
-
+Or
 php artisan vendor:publish --tag=comment.db
+php artisan vendor:publish --tag=comment.config
+php artisan vendor:publish --tag=comment.views
 ```
 
 
