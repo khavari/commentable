@@ -80,12 +80,14 @@ $content  = Content::findOrFail($id);
 $comments = $content->comments;
 ```
 
-### Show comments section in front
-If you have comments section in `product` or `content` or ... 
+### Show comments section in frontend
+If you have comments section in `product` or `content` or etc  
 you must include `comment::frontend.comments` with 
 `['commentable_id' => $content->id ,'commentable_type' => 'fullClassName']`
+
 Example:
 ```php
 @include("comment::frontend.comments",['commentable_id' => $content->id ,'commentable_type' => 'Easteregg\CMS\ContentManagement\Content\Eloquent\Content'])
+
 @include("comment::frontend.comments",['commentable_id' => $product->id ,'commentable_type' => 'Easteregg\Diagon\Product\Product'])
 ```
