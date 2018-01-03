@@ -72,8 +72,6 @@ $comment->user_id     = auth()->user()->id;
 
 $content = Content::findOrFail($id);
 $content->comments()->save($comment);
-
-Comment::add($body, $authorable, $commentable)->save();
 ```
 
 ### Retrieving comments of content
