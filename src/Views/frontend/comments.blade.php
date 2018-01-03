@@ -1,8 +1,8 @@
 <?php
 if (isset($product)) {
-    $comments = $product->comments()->active()->parent()->get();
+    $comments = $product->activeParentComments();
 } elseif (isset($content)) {
-    $comments = $content->comments()->active()->parent()->get();
+    $comments = $content->activeParentComments();
 } else {
     $comments = null;
 }
@@ -67,6 +67,7 @@ if (isset($product)) {
                         </div>
                     </div>
                 @endif
+                    {{--{{$comments->appends($_GET)->links()}}--}}
             </div>
         </div>
         <br>

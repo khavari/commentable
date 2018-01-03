@@ -2,14 +2,14 @@
 
 #### Commentable is a comments model for Laravel 5.
 
-### Installation
+### 1. Install
 
-Require this package in your composer.json and update composer.
-
+Run the following command or require this package in your composer.json and update composer.
 ```
 composer require "Easteregg\Comment"
 ```
 
+### 2. Register
 Add `CommentServiceProvider` and `CommentEventProvider` to the `providers` array in
 `app/config/app.php`:
 
@@ -20,8 +20,8 @@ Add `CommentServiceProvider` and `CommentEventProvider` to the `providers` array
     'Easteregg\Comment\CommentEventProvider::class'
 );
 ```
-
-To publish Migrations , Config , views
+### 3. Publish
+Publish migrations , config , views
 ```
 php artisan vendor:publish --provider="Easteregg\Comment\CommentServiceProvider"
 
@@ -31,45 +31,29 @@ php artisan vendor:publish --tag=comment.config
 php artisan vendor:publish --tag=comment.views
 ```
 
-
-run the migration:
+### 4. Migrate database
 ```
 php artisan migrate
 ```
+### 4. Configure
+```
+...
+...
+```
 
-### Comment relation in Product model
+### Usage
+
+Use commentable in Product model
 ```php
-namespace Easteregg\Diagon\Product;
-
 use Easteregg\Comment\Comment;
-
 class Product extends Model
 {
-   ...
-   public function comments()
-       {
-           return $this->morphMany(Comment::class, 'commentable');
-       }
+    use Commentable;
+    ...
 }
 ```
 
-### Comment relation in Content model
-```php
-namespace  Easteregg\CMS\ContentManagement\Content\Eloquent;
-
-use Easteregg\Comment\Comment;
-
-class Content extends Model
-{
-   ...
-   public function comments()
-       {
-           return $this->morphMany(Comment::class, 'commentable');
-       }
-}
-```
-
-### Adding comments for content
+Adding comments for content
 ```php
 $comment              = new Comment();
 $comment->parent_id   = $parent_id;
@@ -79,11 +63,23 @@ $comment->user_id     = auth()->user()->id;
 $content = Content::findOrFail($id);
 $content->comments()->save($comment);
 ```
-
-### Retrieving comments of content
+Or
 ```php
-$content  = Content::findOrFail($id);
-$comments = $content->comments;
+$body      = $request->body;
+$parent_id = $request->parent_id;
+$content->submitComment($body, $parent_id);
+```
+
+
+
+
+Retrieving comments of content model
+```php
+$comments = $content->comments()->get();
+and
+$comments = $content->activeParentComments();
+and
+$comments = $content->childComments();
 ```
 
 ### Show comments section in frontend

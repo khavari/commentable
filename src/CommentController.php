@@ -11,8 +11,10 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Schema;
 
 
+
 class CommentController extends Controller
 {
+    use Commentable;
     protected $setting;
 
     public function index()
@@ -139,15 +141,7 @@ class CommentController extends Controller
             $parent_id = null;
         }
 
-        // new comment
-        $comment = new Comment();
-        $comment->parent_id = $parent_id;
-        $comment->body = $body;
-        $comment->user_id = auth()->user()->id;
-        // assign comment to model
-        $commentable = $model->findOrFail($id);
-        $commentable->comments()->save($comment);
-
+        $model->findOrFail($id)->submitComment($body, $parent_id);
         session()->flash('successCommit', trans('comment::messages.submitMessage'));
         return back();
     }

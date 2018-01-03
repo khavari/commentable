@@ -49,6 +49,4 @@ class Comment extends Model
         return $query->where('approve', 1);
     }
 
-    
-
 }
