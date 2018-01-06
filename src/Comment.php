@@ -49,4 +49,35 @@ class Comment extends Model
         return $query->where('approve', 1);
     }
 
+    public function hasChildren(): bool
+    {
+        return $this->children()->count() > 0;
+    }
+
+    public function deleteComment()
+    {
+        $comments = $this->children()->get();
+        foreach ($comments as $comment) {
+            if ($comment->hasChildren()) {
+                $comment->deleteComment();
+            }else{
+                $comment->delete();
+            }
+        }
+        $this->delete();
+    }
+
+    public function restoreComment()
+    {
+        $comments = $this->children()->withTrashed()->get();
+        foreach ($comments as $comment) {
+            if ($comment->children()->withTrashed()->count() > 0) {
+                $comment->restoreComment();
+            }else{
+                $comment->restore();
+            }
+        }
+        $this->restore();
+    }
+
 }

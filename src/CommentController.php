@@ -11,7 +11,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Schema;
 
 
-
 class CommentController extends Controller
 {
     use Commentable;
@@ -19,26 +18,24 @@ class CommentController extends Controller
 
     public function index()
     {
-         setting()->dot("enableComment", "1");
+        setting()->dot("enableComment", "1");
         if (Request('search')) {
             $search = Request('search');
             $comments = Comment::withTrashed()->whereTranslationLike('body', "%$search%")->paginate(15);
-        }
-        elseif (Request('approve')){
+        } elseif (Request('approve')) {
             $approve = Request('approve');
             if ($approve == 'approve') {
-                $comments = Comment::withTrashed()->Where('approve', 1)->paginate(15);
+                $comments = Comment::withTrashed()->Where('approve', 1)->orderBy('id', 'desc')->paginate(15);
             } elseif ($approve == 'unapprove') {
-                $comments = Comment::withTrashed()->Where('approve', 0)->paginate(15);
+                $comments = Comment::withTrashed()->Where('approve', 0)->orderBy('id', 'desc')->paginate(15);
             } elseif ($approve == 'pending') {
-                $comments = Comment::withTrashed()->Where('approve', null)->paginate(15);
+                $comments = Comment::withTrashed()->Where('approve', null)->orderBy('id', 'desc')->paginate(15);
             } else {
-                $comments = Comment::withTrashed()->paginate(15);
+                $comments = Comment::withTrashed()->orderBy('id', 'desc')->paginate(15);
             }
 
-        }
-        else {
-            $comments = Comment::withTrashed()->paginate(15);
+        } else {
+            $comments = Comment::withTrashed()->orderBy('id', 'desc')->paginate(15);
         }
 
         return view('comment::dashboard.index', compact('comments'));
@@ -91,16 +88,15 @@ class CommentController extends Controller
     public function destroy($id)
     {
         $comment = Comment::findOrFail($id);
-        $comment->children()->delete();
-        $comment->delete();
+        $comment->deleteComment();
         session()->flash('error', trans('comment::messages.deletedMessage'));
-
         return back();
     }
 
     public function restore($id)
     {
-        Comment::withTrashed()->where('id', $id)->restore();
+        $comment = Comment::withTrashed()->findOrFail($id);
+        $comment->restoreComment();
         session()->flash('success', trans('comment::messages.restoredMessage'));
 
         return back();
@@ -143,6 +139,7 @@ class CommentController extends Controller
 
         $model->findOrFail($id)->submitComment($body, $parent_id);
         session()->flash('successCommit', trans('comment::messages.submitMessage'));
+
         return back();
     }
 

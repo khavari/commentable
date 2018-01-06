@@ -8,11 +8,13 @@ use Easteregg\Comment\Comment;
 trait Commentable
 {
 
+    /**
+     * @return mixed
+     */
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-
 
     public function activeParentComments()
     {
@@ -24,14 +26,22 @@ trait Commentable
         return $this->comments()->children()->active()->get();
     }
 
-    public function submitComment($body, $parent_id = null)
+
+    public function submitComment($body, $parent_id = null, $user_id = null)
     {
         $comment = new Comment();
         $comment->parent_id = $parent_id;
         $comment->body = $body;
-        $comment->user_id = auth()->user()->id;
+        if (! is_null($user_id)) {
+            $comment->user_id = $user_id;
+        } else {
+            $comment->user_id = auth()->user()->id;
+        }
         $this->comments()->save($comment);
+
+        return $comment;
     }
+
 
 
 

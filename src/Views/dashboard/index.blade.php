@@ -1,4 +1,4 @@
-@extends(config("haddock.dashboardLayout"))
+@extends(config("comment.dashboardLayout"))
 @section('title', trans('haddock::messages.menu manager'))
 @section('content')
 

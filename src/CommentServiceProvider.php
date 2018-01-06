@@ -14,8 +14,10 @@ class CommentServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/Views/', 'comment');
         $this->loadTranslationsFrom(__DIR__ . '/Locale', 'comment');
 
+        $this->loadConfig();
         //$this->loadMigrations();
         $this->publishMigrations();
+
 
         $this->publishes([
             __DIR__ . '/Views' => base_path('resources/views/vendor/comment'),
@@ -51,5 +53,15 @@ class CommentServiceProvider extends ServiceProvider
         ], 'comment.db');
     }
 
+    /**
+     * Load Config
+     */
+    private function loadConfig()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/comment.php',
+            'comments'
+        );
+    }
 
 }

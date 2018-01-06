@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "dashboardLayout"   => "dashboard::layouts.master",
+    "dashboardLayout"   => "comment::master",
     "masterLayout"      => "coredoc-assets::master"
 ];

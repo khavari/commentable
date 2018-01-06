@@ -3,14 +3,14 @@
 namespace Tests;
 
 
-use Carbon\Carbon;
-use Easteregg\Diagon\Helpers\Sluggify;
-use Easteregg\Diagon\Product\Product;
-use Faker\Factory;
-use Orchestra\Testbench\TestCase as TestCommentCase;
+use Easteregg\Comment\CommentEventProvider;
+use Easteregg\Comment\CommentServiceProvider;
+use Easteregg\Setting\SettingServiceProvider;
+use Orchestra\Testbench\TestCase as TestBenchCase;
 
-abstract class TestCase extends TestCommentCase
+abstract class TestCase extends TestBenchCase
 {
+
     /**
      * Setup the test environment.
      *
@@ -19,9 +19,11 @@ abstract class TestCase extends TestCommentCase
     public function setUp()
     {
         parent::setUp();
+
+        //$this->withFactories(__DIR__ . '/factories');
+
         $this->migrateTables();
     }
-
 
 
     private function migrateTables()
@@ -30,10 +32,23 @@ abstract class TestCase extends TestCommentCase
             '--database' => 'testing',
             '--realpath' => realpath(__DIR__ . '/migrations'),
         ]);
+
     }
 
 
+    protected function getPackageProviders($app)
+    {
+        return [
+            CommentServiceProvider::class,
+            CommentEventProvider::class,
+            SettingServiceProvider::class,
+        ];
+    }
 
-
-
+    protected function getEnvironmentSetup($app)
+    {
+        $app['config']->set('translatable.locales', ['en']);
+        $app['config']->set('app.locale', 'en');
+        $app['config']->set('comment.dashboardLayout','comment::master');
+    }
 }
