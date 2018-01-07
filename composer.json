@@ -34,5 +34,11 @@
         "Easteregg\\Comment\\CommentServiceProvider"
       ]
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url":  "git@gitlab.com:easteregg/setting.git"
+    }
+  ]
 }

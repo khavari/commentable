@@ -15,7 +15,7 @@ class CommentController extends Controller
 
     public function index()
     {
-       // setting()->dot("enableComment", "1");
+        setting()->dot("enableComment", "1");
         if (Request('search')) {
             $search = Request('search');
             $comments = Comment::withTrashed()->whereTranslationLike('body', "%$search%")->paginate(15);
