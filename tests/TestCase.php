@@ -41,7 +41,7 @@ abstract class TestCase extends TestBenchCase
         return [
             CommentServiceProvider::class,
             CommentEventProvider::class,
-            SettingServiceProvider::class,
+        //    SettingServiceProvider::class,
         ];
     }
 

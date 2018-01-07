@@ -4,11 +4,8 @@ namespace Easteregg\Comment;
 
 
 use Carbon\Carbon;
-use Easteregg\CMS\ContentManagement\Content\Eloquent\Content;
-use Easteregg\Diagon\Product\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Schema;
 
 
 class CommentController extends Controller
@@ -18,7 +15,7 @@ class CommentController extends Controller
 
     public function index()
     {
-        setting()->dot("enableComment", "1");
+       // setting()->dot("enableComment", "1");
         if (Request('search')) {
             $search = Request('search');
             $comments = Comment::withTrashed()->whereTranslationLike('body', "%$search%")->paginate(15);
