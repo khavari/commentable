@@ -1,11 +1,12 @@
-# Before Script
-before_script:
-  - echo "memory_limit = 256M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/ci-runner.ini
-  - composer self-update
-  - composer install --prefer-dist > /dev/null
-
-php:7.0:
-  image: bobey/docker-gitlab-ci-runner-php7
-  script:
-    - echo "Running PHPUnit Tests"
-    - php vendor/bin/phpunit --colors
+   phpunit:php7.0:
+      before_script:
+        - apt-get update -yqq
+        - apt-get install git -yqq
+        - apt-get install -yqq zlib1g-dev --no-install-recommends
+        - docker-php-ext-install zip
+        - curl -sS https://getcomposer.org/installer | php
+        - php composer.phar install
+      image: php:7.0
+      script:
+        - echo "Running PHPUnit Tests"
+        - php vendor/bin/phpunit --colors
