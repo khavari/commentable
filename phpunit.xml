@@ -18,14 +18,22 @@
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">./src</directory>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/</directory>
             <exclude>
-                <file>./src/Config/routes.php</file>
+                <file>./src/routes.php</file>
                 <directory>
-                    src/Database/migrations
+                    ./src/migrations
+                </directory>
+                <directory>
+                    ./src/Resources
                 </directory>
             </exclude>
         </whitelist>
     </filter>
+    <php>
+        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_DEBUG" value="true"/>
+    </php>
 </phpunit>

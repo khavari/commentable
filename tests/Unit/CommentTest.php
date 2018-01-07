@@ -7,7 +7,6 @@ use Easteregg\Comment\Comment;
 use Illuminate\Support\Facades\Auth;
 use Tests\Content;
 use Tests\TestCase;
-use App\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
