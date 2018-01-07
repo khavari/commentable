@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "easteregg/setting": "~5.2"
   },
   "autoload": {
     "psr-4": {
@@ -18,27 +19,26 @@
   },
   "require-dev": {
     "orchestra/testbench": "^3.2",
-    "poolport/poolport": "^3.2",
-    "phpunit/phpunit": "^5.5",
+    "phpunit/phpunit": "^5.7",
     "laravel/framework": "~5.2",
-    "mockery/mockery": "^0.9.5"
+    "doctrine/dbal": "^2.5"
   },
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
     }
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://repos.raymand-co.ir"
-    }
-  ],
   "extra": {
     "laravel": {
       "providers": [
         "Easteregg\\Comment\\CommentServiceProvider"
       ]
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url":  "git@gitlab.com:easteregg/setting.git"
+    }
+  ]
 }
