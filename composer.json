@@ -13,7 +13,6 @@
     "laravel/framework": "5.5.*",
     "doctrine/dbal": "~2.5",
     "easteregg/setting": "dev-master"
-
   },
   "autoload": {
     "psr-4": {
@@ -21,10 +20,9 @@
     }
   },
   "require-dev": {
-    "fzaninotto/faker": "1.5.*@dev",
-    "orchestra/testbench": "3.5.*",
-    "phpunit/phpunit": "6.*",
-    "phpstan/phpstan": "^0.9.0@dev"
+    "orchestra/testbench": "^3.2",
+    "orchestra/database": "3.5.2",
+    "phpunit/phpunit": "6.*"
   },
   "autoload-dev": {
     "psr-4": {

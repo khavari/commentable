@@ -30,7 +30,6 @@ abstract class TestCase extends TestBenchCase
     {
         $this->artisan('migrate', [
             '--database' => 'testing',
-            '--realpath' => realpath(__DIR__ . '/migrations'),
         ]);
 
     }
@@ -42,6 +41,7 @@ abstract class TestCase extends TestBenchCase
             CommentServiceProvider::class,
             CommentEventProvider::class,
             SettingServiceProvider::class,
+            TestingServiceProvider::class,
         ];
     }
 

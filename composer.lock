@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3c4898a2c1b448460a8e8ea0230fc39",
-    "content-hash": "3082fc5f4202727dcd1514fb125bf2b9",
+    "hash": "40efaef3cc7a3ac40102f1485d2aeede",
+    "content-hash": "01f2a2efc7844da6f4a7a57a83ef4c5c",
     "packages": [
         {
             "name": "dimsav/laravel-translatable",
@@ -2367,32 +2367,30 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.5.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d"
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
-                "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
-            },
-            "suggest": {
-                "ext-intl": "*"
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -2415,7 +2413,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-05-29 06:29:14"
+            "time": "2017-08-15 16:48:10"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -3067,6 +3065,60 @@
             "time": "2017-11-24 11:07:03"
         },
         {
+            "name": "orchestra/database",
+            "version": "v3.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/database.git",
+                "reference": "abcfcd827c0b1196cd200315390720e52a4a2a7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/database/zipball/abcfcd827c0b1196cd200315390720e52a4a2a7b",
+                "reference": "abcfcd827c0b1196cd200315390720e52a4a2a7b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.5.0",
+                "illuminate/database": "~5.5.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Database\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com",
+                    "homepage": "https://github.com/taylorotwell"
+                }
+            ],
+            "description": "Database Component for Orchestra Platform",
+            "keywords": [
+                "database",
+                "orchestra-platform",
+                "orchestral"
+            ],
+            "time": "2017-11-03 02:33:29"
+        },
+        {
             "name": "orchestra/testbench",
             "version": "v3.5.3",
             "source": {
@@ -3551,12 +3603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "a50b95cb29fe720a3f8b35297fe3b559d6616d5a"
+                "reference": "5a23f084f89e7111980382ead9b77f4c29ac285a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a50b95cb29fe720a3f8b35297fe3b559d6616d5a",
-                "reference": "a50b95cb29fe720a3f8b35297fe3b559d6616d5a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5a23f084f89e7111980382ead9b77f4c29ac285a",
+                "reference": "5a23f084f89e7111980382ead9b77f4c29ac285a",
                 "shasum": ""
             },
             "require": {
@@ -3603,7 +3655,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2018-01-04 11:41:29"
+            "time": "2018-01-07 11:26:07"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4651,7 +4703,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "easteregg/setting": 20,
-        "fzaninotto/faker": 20,
         "phpstan/phpstan": 20
     },
     "prefer-stable": false,

@@ -4,11 +4,9 @@ namespace Tests\Unit;
 
 use Carbon\Carbon;
 use Easteregg\Comment\Comment;
-use Illuminate\Support\Facades\Auth;
 use Tests\Content;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 class CommentTest extends TestCase
 {

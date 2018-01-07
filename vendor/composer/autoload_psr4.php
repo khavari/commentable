@@ -32,6 +32,7 @@ return array(
     'PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
     'PHPStan\\' => array($vendorDir . '/phpstan/phpstan/src', $vendorDir . '/phpstan/phpstan/build/PHPStan'),
     'Orchestra\\Testbench\\' => array($vendorDir . '/orchestra/testbench-core/src'),
+    'Orchestra\\Database\\' => array($vendorDir . '/orchestra/database'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Jean85\\' => array($vendorDir . '/jean85/pretty-package-versions/src'),
